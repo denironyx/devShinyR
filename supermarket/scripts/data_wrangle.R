@@ -38,6 +38,19 @@ df_supermarket %>% head() %>% View()
 # Add a location column to the data
 
 # add a location region
+city_names <- df_supermarket$city %>% unique() %>% as.data.frame()
 
-nominatim_loc_geo <- geocode_OSM(df_supermarket$city, details = FALSE, as.data.frame = TRUE)
+nominatim_loc_geo <- geocode_OSM(city_names$., details = FALSE, as.data.frame = TRUE)
+
+nominatim_loc_geo <- nominatim_loc_geo %>% 
+  mutate(city = as.factor(query)) %>% 
+  select(city, lat, lon)
+
+# merge df_supermarket with nominatim_loc_geo
+df_supermarket <- df_supermarket %>% 
+  left_join(nominatim_loc_geo, by = "city")
+
+
+
+
          
