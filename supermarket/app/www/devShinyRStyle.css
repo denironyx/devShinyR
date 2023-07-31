@@ -1,0 +1,95 @@
+/* NAVBAR BORDER */
+.border-bottom {
+    border-bottom: 1px solid #868e96!important;
+  }
+
+/* DARK MODE */
+  .container-fluid {
+    width: 100%;
+    background-color: white;
+  }
+
+.content-wrapper {
+    background: white;
+}
+
+@media (max-width: 992px) {
+	:root [class*='sidebar-collapse'] {
+		--layout-sidebar-width: 0px;
+	}
+}
+
+
+/* TEXT: INFO*/
+  .text-info {
+    color: #605ca8!important;
+  }
+
+h4, .h4 {
+  font-size: 1.5rem;
+  color: #605ca8!important;
+}
+
+h2, .h2 {
+  font-size: 1.5rem;
+  color: #605ca8!important;
+}
+
+
+h6, .h6 {
+  margin-bottom: .5rem;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #605ca8;
+}
+
+.thead {
+  color: black;
+}
+
+.tbody {
+  color: black;
+}
+
+.fa-table {
+  color: #605ca8;;
+}
+
+.fa-chart-line {
+  color: #605ca8;;
+}
+
+.fa-arrows-split-up-and-left {
+  color: #605ca8;;
+}
+
+h3, .h3 {
+    margin-bottom: .5rem;
+    font-family: inherit;
+    font-weight: 900;
+    line-height: 1.2;
+    color: inherit;
+}
+
+.d-block {
+  color: #605ca8;
+}
+
+/* FOOTER */
+
+
+
+/* CUSTOM INLINE INPUTS USING CSS GRID */
+  .form-group.pi-inline-input {
+    display: inline-grid;
+    grid-template-columns: auto 1fr;
+    
+    grid-column-gap: 1em;
+    margin: 0.5em 0;
+    width: 100%;
+  }
+
+.form-group.pi-inline-input label {
+  font-weight: 600;
+}

@@ -7,22 +7,22 @@ library(waiter)
 # Load up a font
 system('fc-cache -f ~/.fonts')
 #thematic_shiny()
-purple_1 = "#393B98"
+purple_1 = "#605ca8"
 # Shiny App Layout
 shinyApp(
   ui = bs4DashPage(
     #preloader = list(html = spin_2(), color = "#800080"),
-    preloader = list(html = tagList(spin_1(), "loading ..."), color = "#393B98"),
+    preloader = list(html = tagList(spin_1(), "loading ..."), color = "#605ca8"),
     dark = NULL,
     header = bs4DashNavbar(
-      
       # navbar
       skin = "light",
+      status = "white",
       border = FALSE,
       #sidebarIcon = icon("bars"),
       #compact = TRUE,
       disable = FALSE,
-      title = dashboardBrand(
+      title = bs4DashBrand(
           title = "Velion, Inc", 
           color = "white",
           href = "https://www.linkedin.com/in/dennis-irorere/",
@@ -37,9 +37,10 @@ shinyApp(
           )
         ),
     sidebar = bs4DashSidebar(
-      fixed = TRUE,
       skin = "light",
-      status = "light",
+      status = "purple",
+      brandColor = NULL,
+      
       bs4SidebarUserPanel(
         name = " XYZ Customer"
       ),
@@ -59,7 +60,12 @@ shinyApp(
         )
       )
     ),
-    body = bs4DashBody(),
+    body = bs4DashBody(
+      # using shinyjs
+      useShinyjs(),
+      
+      includeCSS("www/devShinyRStyle.css")
+    ),
     controlbar = bs4DashControlbar(),
     footer = bs4DashFooter(
       fixed = FALSE,
