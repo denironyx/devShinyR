@@ -44,7 +44,7 @@ shinyApp(
       brandColor = NULL,
       
       bs4SidebarUserPanel(
-        name = "      XYZ Customer"
+        name = "XYZ Customer"
       ),
       
       # Side bar Menu
@@ -70,50 +70,54 @@ shinyApp(
       # custom CSS
       includeCSS("www/devShinyRStyle.css"),
       
+      div(
+        fluidRow(
+          # Summary cards
+          bs4Card(
+            title = "Summaries",
+            closable = FALSE,
+            width = 12,
+            status = "white",
+            headerBorder = FALSE,
+            fluidRow(
+              bs4ValueBox(
+                elevation = 2,
+                width = 3,
+                value = h4(bs4ValueBoxOutput("total_income", "$")),
+                subtitle = "Total Income",
+                icon = icon("money-bill")
+              ),
+              bs4ValueBox(
+                elevation = 2,
+                width = 3,
+                value = h4(bs4ValueBoxOutput("total_quantity","")),
+                subtitle = "Total Quantity",
+                icon = icon("calculator")
+              ),
+              bs4ValueBox(
+                elevation = 2,
+                width = 3,
+                value = h4(bs4ValueBoxOutput("gross_income", "$")),
+                subtitle = "Gross Income",
+                icon = icon("money-bill")
+              ),
+              bs4ValueBox(
+                elevation = 2,
+                width = 3,
+                value = h4(bs4ValueBoxOutput("total_products", "")),
+                subtitle = "Total Products",
+                icon = icon("shop")
+              )
+            )
+          )
+        )
+      ),
+      
       bs4TabItems(
         #Overview tab
         bs4TabItem(
           tabName = "overview",
-          fluidRow(
-            # Summary cards
-            bs4Card(
-              title = "Summaries",
-              closable = FALSE,
-              width = 12,
-              status = "white",
-              headerBorder = FALSE,
-              fluidRow(
-                bs4ValueBox(
-                  elevation = 2,
-                  width = 3,
-                  value = h4(bs4ValueBoxOutput("total_income", "$")),
-                  subtitle = "Total Income",
-                  icon = icon("money-bill")
-                ),
-                bs4ValueBox(
-                  elevation = 2,
-                  width = 3,
-                  value = h4(bs4ValueBoxOutput("total_quantity","")),
-                  subtitle = "Total Quantity",
-                  icon = icon("calculator")
-                ),
-                bs4ValueBox(
-                  elevation = 2,
-                  width = 3,
-                  value = h4(bs4ValueBoxOutput("gross_income", "$")),
-                  subtitle = "Gross Income",
-                  icon = icon("money-bill")
-                ),
-                bs4ValueBox(
-                  elevation = 2,
-                  width = 3,
-                  value = h4(bs4ValueBoxOutput("total_products", "")),
-                  subtitle = "Total Products",
-                  icon = icon("shop")
-                )
-              )
-            )
-          ),
+          
           
           # fluid row 
           fluidRow(
@@ -145,8 +149,28 @@ shinyApp(
               closable = FALSE,
               width = 12,
               status = "purple",
+              collapsible = FALSE,
+              maximizable = FALSE,
               fluidRow(
                 plotlyOutput("daily_sales")
+              )
+            )
+          )
+        ),
+        
+        # Data table tab
+        bs4TabItem(
+          tabName = "table",
+          fluidRow(
+            bs4Card(
+              title = "Data Table",
+              closable = FALSE,
+              width = 12,
+              collapsible = FALSE,
+              status = "purple",
+              maximizable = FALSE,
+              fluidRow(
+                DT::DTOutput("datatable")
               )
             )
           )
@@ -166,7 +190,7 @@ shinyApp(
       ),
       right = "@2023"
     ),
-    title = "bs4Dash Showcase"
+    title = "Dashboard Showcase"
   ),
   
   server = function(input, output, session){
