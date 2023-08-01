@@ -3,6 +3,7 @@ library(shiny)
 library(bs4Dash)
 library(thematic)
 library(waiter)
+library(shinyjs)
 
 # Load up a font
 system('fc-cache -f ~/.fonts')
@@ -71,9 +72,9 @@ shinyApp(
       fixed = FALSE,
       left = a(
         href = "https://twitter.com/denironyx",
-        target = "_blank", "Dennis Irorere"
+        target = "_blank", "Velion Enterprise"
       ),
-      right = "2023"
+      right = "@2023"
     ),
     title = "bs4Dash Showcase"
   ),
