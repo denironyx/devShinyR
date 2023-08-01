@@ -4,6 +4,7 @@ library(bs4Dash)
 library(thematic)
 library(waiter)
 library(shinyjs)
+library(plotly)
 
 # Load up a font
 system('fc-cache -f ~/.fonts')
@@ -43,7 +44,7 @@ shinyApp(
       brandColor = NULL,
       
       bs4SidebarUserPanel(
-        name = " XYZ Customer"
+        name = "      XYZ Customer"
       ),
       
       # Side bar Menu
@@ -74,6 +75,7 @@ shinyApp(
         bs4TabItem(
           tabName = "overview",
           fluidRow(
+            # Summary cards
             bs4Card(
               title = "Summaries",
               closable = FALSE,
@@ -111,8 +113,45 @@ shinyApp(
                 )
               )
             )
+          ),
+          
+          # fluid row 
+          fluidRow(
+            box(
+              id = "map",
+              title = "Map of City vs Total Income",
+              width = 6,
+              status = "purple",
+              closable = FALSE,
+              maximizable = TRUE,
+              collapsible = FALSE,
+              leaflet::leafletOutput("map_income")
+            ),
+            box(
+              id = "payment_chart",
+              title = "Pie Chart - Payment Type",
+              width = 6, 
+              status = "purple",
+              closable = FALSE,
+              maximizable = TRUE,
+              collapsible = FALSE,
+              plotlyOutput("payment_type")
+            )
+          ),
+          
+          fluidRow(
+            bs4Card(
+              title = "Daily Sales",
+              closable = FALSE,
+              width = 12,
+              status = "purple",
+              fluidRow(
+                plotlyOutput("daily_sales")
+              )
+            )
           )
         )
+        
       )
       
       
