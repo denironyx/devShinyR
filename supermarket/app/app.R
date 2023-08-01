@@ -62,10 +62,61 @@ shinyApp(
       )
     ),
     body = bs4DashBody(
+      # Body ----------------------------
+      
       # using shinyjs
       useShinyjs(),
+      # custom CSS
+      includeCSS("www/devShinyRStyle.css"),
       
-      includeCSS("www/devShinyRStyle.css")
+      bs4TabItems(
+        #Overview tab
+        bs4TabItem(
+          tabName = "overview",
+          fluidRow(
+            bs4Card(
+              title = "Summaries",
+              closable = FALSE,
+              width = 12,
+              status = "white",
+              headerBorder = FALSE,
+              fluidRow(
+                bs4ValueBox(
+                  elevation = 2,
+                  width = 3,
+                  value = h4(bs4ValueBoxOutput("total_income", "$")),
+                  subtitle = "Total Income",
+                  icon = icon("money-bill")
+                ),
+                bs4ValueBox(
+                  elevation = 2,
+                  width = 3,
+                  value = h4(bs4ValueBoxOutput("total_quantity","")),
+                  subtitle = "Total Quantity",
+                  icon = icon("calculator")
+                ),
+                bs4ValueBox(
+                  elevation = 2,
+                  width = 3,
+                  value = h4(bs4ValueBoxOutput("gross_income", "$")),
+                  subtitle = "Gross Income",
+                  icon = icon("money-bill")
+                ),
+                bs4ValueBox(
+                  elevation = 2,
+                  width = 3,
+                  value = h4(bs4ValueBoxOutput("total_products", "")),
+                  subtitle = "Total Products",
+                  icon = icon("shop")
+                )
+              )
+            )
+          )
+        )
+      )
+      
+      
+      
     ),
     controlbar = bs4DashControlbar(),
     footer = bs4DashFooter(
