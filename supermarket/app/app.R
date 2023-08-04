@@ -78,7 +78,49 @@ shinyApp(
           column(3, picker_customer_type),
           column(3, picker_product_line),
           column(3, daterange)
+        ),
+        
+        fluidRow(
+          # Summary cards
+          bs4Card(
+            title = "Summaries",
+            closable = FALSE,
+            width = 12,
+            status = "purple",
+            headerBorder = FALSE,
+            fluidRow(
+              bs4ValueBox(
+                elevation = 2,
+                width = 3,
+                value = h4(bs4ValueBoxOutput("total_income", "$")),
+                subtitle = "Total Income",
+                icon = icon("money-bill")
+              ),
+              bs4ValueBox(
+                elevation = 2,
+                width = 3,
+                value = h4(bs4ValueBoxOutput("total_quantity","")),
+                subtitle = "Total Quantity",
+                icon = icon("calculator")
+              ),
+              bs4ValueBox(
+                elevation = 2,
+                width = 3,
+                value = h4(bs4ValueBoxOutput("gross_income", "$")),
+                subtitle = "Gross Income",
+                icon = icon("money-bill")
+              ),
+              bs4ValueBox(
+                elevation = 2,
+                width = 3,
+                value = h4(bs4ValueBoxOutput("total_products", "")),
+                subtitle = "Total Products",
+                icon = icon("shop")
+              )
+            )
+          )
         )
+        
       ),
       
       bs4TabItems(
@@ -129,47 +171,6 @@ shinyApp(
         # Data table tab
         bs4TabItem(
           tabName = "inventory",
-          
-          fluidRow(
-            # Summary cards
-            bs4Card(
-              title = "Summaries",
-              closable = FALSE,
-              width = 12,
-              status = "white",
-              headerBorder = FALSE,
-              fluidRow(
-                bs4ValueBox(
-                  elevation = 2,
-                  width = 3,
-                  value = h4(bs4ValueBoxOutput("total_income", "$")),
-                  subtitle = "Total Income",
-                  icon = icon("money-bill")
-                ),
-                bs4ValueBox(
-                  elevation = 2,
-                  width = 3,
-                  value = h4(bs4ValueBoxOutput("total_quantity","")),
-                  subtitle = "Total Quantity",
-                  icon = icon("calculator")
-                ),
-                bs4ValueBox(
-                  elevation = 2,
-                  width = 3,
-                  value = h4(bs4ValueBoxOutput("gross_income", "$")),
-                  subtitle = "Gross Income",
-                  icon = icon("money-bill")
-                ),
-                bs4ValueBox(
-                  elevation = 2,
-                  width = 3,
-                  value = h4(bs4ValueBoxOutput("total_products", "")),
-                  subtitle = "Total Products",
-                  icon = icon("shop")
-                )
-              )
-            )
-          ),
           
           fluidRow(
             bs4Card(

@@ -68,6 +68,14 @@ h6, .h6 {
   color: #605ca8;
 }
 
+.fa-calculator{
+  color: #605ca8;
+}
+
+.fa-shop{
+  color: #605ca8;
+}
+
 h3, .h3 {
     margin-bottom: .5rem;
     font-family: inherit;
@@ -85,7 +93,7 @@ h3, .h3 {
 
 
 /* CUSTOM INLINE INPUTS USING CSS GRID */
-  .form-group.pi-inline-input {
+  .form-group.inline-input {
     display: inline-grid;
     grid-template-columns: auto 1fr;
     
@@ -94,6 +102,6 @@ h3, .h3 {
     width: 100%;
   }
 
-.form-group.pi-inline-input label {
+.form-group.inline-input label {
   font-weight: 600;
 }

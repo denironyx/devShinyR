@@ -25,9 +25,8 @@ df_supermarket <- df_supermarket_raw %>%
            str_replace(.,"-","") %>% 
            str_replace(., "-", "") %>% 
            as.integer(),
-         branch = as.factor(city), 
+         branch = city, 
          gender = as.factor(gender),
-         customer_type = as.factor(customer_type),
          payment = as.factor(payment),
          date = mdy(date))
 

@@ -17,7 +17,8 @@ time_range <- df_supermarket %>%
 get_distinct_df <- function(data, column_name){
   distinct_values <- data %>% 
     select({{column_name}}) %>% 
-    distinct()
+    distinct() %>% 
+    collect()
   
   return(as.data.frame(distinct_values))
 }
@@ -50,7 +51,7 @@ picker_product_line <- pickerInput(
 picker_branch <- pickerInput(
   inputId = "picker_branch",
   label = "Company branch",
-  choices = branch_input_values$branch,
+  choices = branch_input_values,
   selected = branch_input_values$branch,
   multiple = TRUE,
   options = pickerOptions(
@@ -64,7 +65,7 @@ picker_branch <- pickerInput(
 picker_customer_type <- pickerInput(
   inputId = "picker_customer_type",
   label = "Customer type",
-  choices = customer_type_input_values$customer_type,
+  choices = customer_type_input_values,
   selected = customer_type_input_values$customer_type,
   multiple = TRUE,
   options = pickerOptions(
@@ -83,8 +84,6 @@ daterange <- shinyWidgets::airDatepickerInput(
   value = c(time_range$first_date, time_range$last_date),
   minDate = time_range$first_date,
   maxDate = time_range$last_date,
-  dateFormat = "D d M yyyy",
-  separator = ' - ',
   multiple = TRUE, range = TRUE, todayButton = FALSE,
   #clearButton = TRUE,
   update_on = 'close', addon = 'none', width = "370px",
@@ -94,7 +93,19 @@ daterange <- shinyWidgets::airDatepickerInput(
 
 
 
+# CSS
 
+# function to make shiny inputs inline, 'pi-inline-input' is a css class within the dashboard.css
+# To Do: Everything in dashboard.css should go into custom.css
+make_inline <- function(x) {
+  y <- shiny::tagAppendAttributes(x, class = 'inline-input')
+  if (length(y$children) >= 3) {
+    if (y$children[[2]]$name == 'br') {
+      y$children[[2]] <- NULL
+    }
+  }
+  y
+}
 
 
 
