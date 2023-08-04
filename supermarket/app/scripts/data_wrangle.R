@@ -31,7 +31,7 @@ df_supermarket <- df_supermarket_raw %>%
          payment = as.factor(payment),
          date = mdy(date))
 
-df_supermarket %>% head() %>% View()
+#df_supermarket %>% head() %>% View()
 
 # To do: 
 # Drop gross_margin_percentage
@@ -51,6 +51,6 @@ df_supermarket <- df_supermarket %>%
   left_join(nominatim_loc_geo, by = "city")
 
 
-
+saveRDS(df_supermarket, "data/df_supermarket.rds")
 
          

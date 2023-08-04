@@ -6,6 +6,8 @@ library(waiter)
 library(shinyjs)
 library(plotly)
 
+source("scripts/data_wrangle.R")
+source("scripts/app_component.R")
 # Load up a font
 system('fc-cache -f ~/.fonts')
 #thematic_shiny()
@@ -44,7 +46,7 @@ shinyApp(
       brandColor = NULL,
       
       bs4SidebarUserPanel(
-        name = "XYZ Customer"
+        name = h4("XYZ Customer", style = "font-style:italic; justify-content: center;")
       ),
       
       # Side bar Menu
@@ -56,8 +58,8 @@ shinyApp(
           icon = icon("dashboard")
         ),
         bs4SidebarMenuItem(
-          text = "Table",
-          tabName = "table",
+          text = "Inventory",
+          tabName = "inventory",
           icon = icon("table")
         )
       )
@@ -72,44 +74,10 @@ shinyApp(
       
       div(
         fluidRow(
-          # Summary cards
-          bs4Card(
-            title = "Summaries",
-            closable = FALSE,
-            width = 12,
-            status = "white",
-            headerBorder = FALSE,
-            fluidRow(
-              bs4ValueBox(
-                elevation = 2,
-                width = 3,
-                value = h4(bs4ValueBoxOutput("total_income", "$")),
-                subtitle = "Total Income",
-                icon = icon("money-bill")
-              ),
-              bs4ValueBox(
-                elevation = 2,
-                width = 3,
-                value = h4(bs4ValueBoxOutput("total_quantity","")),
-                subtitle = "Total Quantity",
-                icon = icon("calculator")
-              ),
-              bs4ValueBox(
-                elevation = 2,
-                width = 3,
-                value = h4(bs4ValueBoxOutput("gross_income", "$")),
-                subtitle = "Gross Income",
-                icon = icon("money-bill")
-              ),
-              bs4ValueBox(
-                elevation = 2,
-                width = 3,
-                value = h4(bs4ValueBoxOutput("total_products", "")),
-                subtitle = "Total Products",
-                icon = icon("shop")
-              )
-            )
-          )
+          column(3, picker_branch),
+          column(3, picker_customer_type),
+          column(3, picker_product_line),
+          column(3, daterange)
         )
       ),
       
@@ -160,7 +128,49 @@ shinyApp(
         
         # Data table tab
         bs4TabItem(
-          tabName = "table",
+          tabName = "inventory",
+          
+          fluidRow(
+            # Summary cards
+            bs4Card(
+              title = "Summaries",
+              closable = FALSE,
+              width = 12,
+              status = "white",
+              headerBorder = FALSE,
+              fluidRow(
+                bs4ValueBox(
+                  elevation = 2,
+                  width = 3,
+                  value = h4(bs4ValueBoxOutput("total_income", "$")),
+                  subtitle = "Total Income",
+                  icon = icon("money-bill")
+                ),
+                bs4ValueBox(
+                  elevation = 2,
+                  width = 3,
+                  value = h4(bs4ValueBoxOutput("total_quantity","")),
+                  subtitle = "Total Quantity",
+                  icon = icon("calculator")
+                ),
+                bs4ValueBox(
+                  elevation = 2,
+                  width = 3,
+                  value = h4(bs4ValueBoxOutput("gross_income", "$")),
+                  subtitle = "Gross Income",
+                  icon = icon("money-bill")
+                ),
+                bs4ValueBox(
+                  elevation = 2,
+                  width = 3,
+                  value = h4(bs4ValueBoxOutput("total_products", "")),
+                  subtitle = "Total Products",
+                  icon = icon("shop")
+                )
+              )
+            )
+          ),
+          
           fluidRow(
             bs4Card(
               title = "Data Table",
