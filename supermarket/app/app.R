@@ -74,10 +74,10 @@ shinyApp(
       
       div(
         fluidRow(
-          column(3, picker_branch),
-          column(3, picker_customer_type),
-          column(3, picker_product_line),
-          column(3, daterange)
+          column(2, picker_branch),
+          column(2, picker_customer_type),
+          column(2, picker_product_line),
+          column(2, daterange)
         ),
         
         fluidRow(
@@ -205,6 +205,26 @@ shinyApp(
   ),
   
   server = function(input, output, session){
+    
+    filtered_data <- reactive({
+      df_supermarket %>% 
+        filter(product_line %in% picker_product_line,
+               branch %in% picker_branch,
+               customer_type %in% picker_customer_type) %>% 
+        as_tibble()
+    })
+      
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     output$user <- renderUser({
       dashboardUser(
         name = "Dennis Irorere",

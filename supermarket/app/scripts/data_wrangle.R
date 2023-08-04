@@ -52,4 +52,6 @@ df_supermarket <- df_supermarket %>%
 
 saveRDS(df_supermarket, "data/df_supermarket.rds")
 
+
+
          
