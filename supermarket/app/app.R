@@ -5,6 +5,7 @@ library(thematic)
 library(waiter)
 library(shinyjs)
 library(plotly)
+library(DT)
 
 source("scripts/data_wrangle.R")
 source("scripts/app_component.R")
@@ -116,20 +117,6 @@ shinyApp(
                 value = h4(bs4ValueBoxOutput("total_products", "")),
                 subtitle = "Total Products",
                 icon = icon("shop")
-              ),
-              bs4ValueBox(
-                elevation = 2,
-                width = 3,
-                value = h4(bs4ValueBoxOutput("male", "")),
-                subtitle = "Male %",
-                icon = icon("shop")
-              ),
-              bs4ValueBox(
-                elevation = 2,
-                width = 3,
-                value = h4(bs4ValueBoxOutput("female", "")),
-                subtitle = "Female %",
-                icon = icon("shop")
               )
             )
           )
@@ -224,7 +211,8 @@ shinyApp(
       df_supermarket %>% 
         filter(product_line %in% input$picker_product_line,
                branch %in% input$picker_branch,
-               customer_type %in% input$picker_customer_type) %>% 
+               customer_type %in% input$picker_customer_type,
+               date >= input$daterange[1] & date <= input$daterange[2]) %>% 
         as_tibble()
     })
     
@@ -277,6 +265,41 @@ shinyApp(
         theme_minimal() +
         theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
     )
+    
+    # the supermarket table
+    # output$datatable <- DT::renderDataTable({
+    #   datatable(filtered_data() %>% 
+    #               transmute(
+    #                 `Invoice ID` = invoice_id,
+    #                 `Branch` = branch,
+    #                 `Customer Type` = customer_type,
+    #                 `Gender` = gender,
+    #                 `Product` = product_line,
+    #                 `Unit price` = unit_price,
+    #                 `Quantity` = quantity,
+    #                 `Total Price` = total,
+    #                 `Payment Type` = payment_type,
+    #                 `Gross Income` = gross_income
+    #               ),
+    #             rownames = FALSE)
+    # }, options = list(pageLength = 5))
+    output$datatable <- DT::renderDataTable({
+      datatable(filtered_data() %>% 
+                  transmute(
+                    `Invoice ID` = invoice_id,
+                    `Branch` = branch,
+                    `Customer Type` = customer_type,
+                    `Gender` = gender,
+                    `Product` = product_line,
+                    `Unit price` = unit_price,
+                    `Quantity` = quantity,
+                    `Total Price` = total,
+                    `Payment Type` = payment,
+                    `Gross Income` = gross_income
+                  ),
+                rownames = FALSE
+                , options = list(pageLength = 20))
+    })
     
     
     
