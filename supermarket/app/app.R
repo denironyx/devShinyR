@@ -116,6 +116,20 @@ shinyApp(
                 value = h4(bs4ValueBoxOutput("total_products", "")),
                 subtitle = "Total Products",
                 icon = icon("shop")
+              ),
+              bs4ValueBox(
+                elevation = 2,
+                width = 3,
+                value = h4(bs4ValueBoxOutput("male", "")),
+                subtitle = "Male %",
+                icon = icon("shop")
+              ),
+              bs4ValueBox(
+                elevation = 2,
+                width = 3,
+                value = h4(bs4ValueBoxOutput("female", "")),
+                subtitle = "Female %",
+                icon = icon("shop")
               )
             )
           )
@@ -208,16 +222,61 @@ shinyApp(
     
     filtered_data <- reactive({
       df_supermarket %>% 
-        filter(product_line %in% picker_product_line,
-               branch %in% picker_branch,
-               customer_type %in% picker_customer_type) %>% 
+        filter(product_line %in% input$picker_product_line,
+               branch %in% input$picker_branch,
+               customer_type %in% input$picker_customer_type) %>% 
         as_tibble()
     })
-      
     
     
+    output$total_income <- renderText(
+      filtered_data() %>% 
+        summarise(total_income = sum(total)) %>% 
+        pull() %>% 
+        round(digits = 0)
+    )
+    
+    output$total_quantity <- renderText(
+      filtered_data() %>% 
+        summarise(total_quantity = sum(quantity)) %>% 
+        pull() %>% 
+        round(digits = 0)
+    )
+    
+    output$gross_income <- renderText(
+      filtered_data() %>% 
+        summarise(gross_income = sum(gross_income)) %>% 
+        pull() %>% 
+        round(digits = 0)
+    )
+    
+    output$total_products <- renderText(
+      filtered_data() %>% 
+        select(product_line) %>% 
+        distinct() %>% 
+        count() %>% 
+        pull()
+    )
     
     
+    output$daily_sales <- renderPlotly(
+      filtered_data() %>% 
+        group_by(date) %>% 
+        summarize(
+          total_income = sum(total)
+        ) %>% 
+        mutate(label_text = str_glue("Date: {date}
+                                     Total income: {total_income}")) %>% 
+        ggplot(aes(x=date, y=total_income)) +
+        geom_line(size = 0.6, color = "#605ca8") +
+        scale_x_date(date_breaks = "1 day") +
+        labs(
+          x = "Date",
+          y = "Duration" 
+        ) +
+        theme_minimal() +
+        theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+    )
     
     
     

@@ -7,7 +7,8 @@ time_range_table <- data.frame()
 
 time_range <- df_supermarket %>% 
   summarise(first_date = min(date),
-            last_date = max(date))
+            last_date = max(date),
+            start_date = (max(date) - days(30)))
 
 # picker values
 # product type
@@ -81,7 +82,7 @@ picker_customer_type <- pickerInput(
 daterange <- shinyWidgets::airDatepickerInput(
   inputId = 'daterange',  
   label = 'Date range:',
-  value = c(time_range$first_date, time_range$last_date),
+  value = c(time_range$start_date, time_range$last_date),
   minDate = time_range$first_date,
   maxDate = time_range$last_date,
   multiple = TRUE, range = TRUE, todayButton = FALSE,
