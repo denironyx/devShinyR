@@ -6,6 +6,7 @@ library(waiter)
 library(shinyjs)
 library(plotly)
 library(DT)
+library(leaflet)
 
 source("scripts/data_wrangle.R")
 source("scripts/app_component.R")
@@ -140,7 +141,7 @@ shinyApp(
               closable = FALSE,
               maximizable = TRUE,
               collapsible = FALSE,
-              leaflet::leafletOutput("map_income")
+              leafletOutput("map_viz")
             ),
             box(
               id = "payment_chart",
@@ -235,7 +236,8 @@ shinyApp(
       filtered_data() %>% 
         summarise(gross_income = sum(gross_income)) %>% 
         pull() %>% 
-        round(digits = 0)
+        round(digits = 0) %>% 
+        scales::dollar()
     )
     
     output$total_products <- renderText(
@@ -311,6 +313,29 @@ shinyApp(
     }
     )
     
+    output$map_viz <- renderLeaflet({
+      filtered_data() %>% 
+        group_by(branch, lat, lon) %>% 
+        summarise(total_income = sum(total),
+                  total_qty = sum(quantity), .groups = "keep") %>% 
+        ungroup() %>% 
+        leaflet() %>% 
+        addTiles() %>% 
+        addCircleMarkers(
+          lng = ~lon, 
+          lat = ~lat,
+          radius = 7,
+          color = "#605ca8",
+          weight = 10,
+          opacity = 1.0,
+          popup = ~paste("Branch:", branch, "<br>",
+                         "Total Income:", scales::dollar(total_income), "<br>",
+                         "Total Quantity:", total_qty)
+        )
+        
+    })
+   
+     
     
     output$user <- renderUser({
       dashboardUser(

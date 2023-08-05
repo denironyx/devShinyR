@@ -89,24 +89,175 @@ df_supermarket %>%
   plot_ly(labels = ~payment, values = ~count_pay) %>% 
   add_pie(hole=0.6)
 
+library(leaflet)
 
-fig <- fig %>% add_pie(hole = 0.6)
-%>% 
-  plot_ly(labels=~payment, value = ~count_pay) %>% 
-  add_pie(hole = 0.6)
+df_supermarket %>% 
+  group_by(branch, total, lat, lon) %>% 
+  summarise(total_income = sum(total))
+  leaflet() %>% 
+  addTiles()
 
-fig
+map_data <- 
+  df_supermarket %>% 
+    group_by(branch, total, quantity, lat, lon) %>% 
+    summarise(total_income = sum(total),
+              total_quantity = sum(quantity)) %>%
 
-geom_
+df_supermarket %>% 
+  group_by(branch, total, quantity, lat, lon) %>% 
+  summarise(total_income = sum(total),
+            total_qty = sum(quantity)) %>% 
+  leaflet() %>% 
+  addTiles() %>% 
+  addCircleMarkers(
+    lng = ~lon, 
+    lat = ~lat,
+    radius = 6,
+    color = "blue",
+    popup = paste("Branch:", branch, "<br>",
+                  "Total Income:", total_income, "<br>",
+                  "Total Quantity:", quantity)
+  )
+  
+  
+  
+  
+leaflet_mapmap_data <- df_supermarket %>% 
+  group_by(branch, total, quantity, lat, lon) %>% 
+  summarise(total_income = sum(total))
+
+leaflet_map <- leaflet(map_data) %>% 
+  addTiles() %>% 
+  addCircleMarkers(
+    lng = ~lon, 
+    lat = ~lat,
+    radius = 6,
+    color = "blue",
+    popup = paste("Branch:", branch, "<br>",
+                  "Total Income:", total_income, "<br>",
+                  "Total Quantity:", quantity)
+  )
+
+leaflet_map
+  
+
+leaflet_map <- leaflet(map_data) %>% 
+  addTiles() %>% 
+  addCircleMarkers(
+    lng = ~lon, 
+    lat = ~lat,
+    radius = 6,
+    color = "blue",
+    popup = paste("Branch:", branch, "<br>",
+                  "Total Income:", total_income, "<br>",
+                  "Total Quantity:", quantity)
+  )
+
+leaflet_map
+
+df_supermarket %>% 
+  group_by(branch, total, quantity, lat, lon) %>% 
+  summarise(total_income = sum(total),
+            total_qty = sum(quantity), .groups = "keep") %>% 
+  ungroup() %>% 
+  leaflet() %>% 
+  addTiles() %>% 
+  addCircleMarkers(
+    lng = ~lon, 
+    lat = ~lat,
+    radius = 6,
+    color = "blue",
+    popup = paste("Branch:", branch, "<br>",
+                  "Total Income:", total_income, "<br>",
+                  "Total Quantity:", quantity)
+  )
 
 
 
+df_supermarket %>% 
+  group_by(branch, total, quantity, lat, lon) %>% 
+  summarise(total_income = sum(total),
+            total_qty = sum(quantity)) %>% 
+  ungroup()
 
 
+df_supermarket %>% 
+  group_by(branch, lat, lon) %>% 
+  summarise(total_income = sum(total),
+            total_qty = sum(quantity), .groups = "keep") %>% 
+  ungroup() %>% 
+  leaflet() %>% 
+  addTiles() %>% 
+  addCircleMarkers(
+    lng = ~lon, 
+    lat = ~lat,
+    radius = 4,
+    color = "#605ca8",
+    opacity = 5.0,
+    popup = ~paste("Branch:", branch, "<br>",
+                   "Total Income:", scales::dollar(total_income), "<br>",
+                   "Total Quantity:", total_qty)
+  )
 
 
-
-
-
+df_supermarket %>% 
+  group_by(branch, lat, lon) %>% 
+  summarise(total_income = sum(total),
+            total_qty = sum(quantity), .groups = "keep") %>% 
+  ungroup() %>% 
+  leaflet() %>% 
+  addTiles() %>%
+  addMarkers(
+    lng = ~lon,
+    lat = ~lat,
+    popup = ~paste("Branch:", branch, "<br>",
+                   "Total Income:", scales::dollar(total_income), "<br>",
+                   "Total Quantity:", total_qty)
+  )
+  addCircleMarkers(
+    lng = ~lon, 
+    lat = ~lat,
+    radius = 4,
+    color = "#605ca8",
+    opacity = 5.0,
+    popup = ~paste("Branch:", branch, "<br>",
+                   "Total Income:", scales::dollar(total_income), "<br>",
+                   "Total Quantity:", total_qty)
+  )df_supermarket %>% 
+  group_by(branch, lat, lon) %>% 
+  summarise(total_income = sum(total),
+            total_qty = sum(quantity), .groups = "keep") %>% 
+  ungroup() %>% 
+  leaflet() %>% 
+  addTiles() %>% 
+  addCircleMarkers(
+    lng = ~lon, 
+    lat = ~lat,
+    radius = 4,
+    color = "#605ca8",
+    opacity = 5.0,
+    popup = ~paste("Branch:", branch, "<br>",
+                   "Total Income:", scales::dollar(total_income), "<br>",
+                   "Total Quantity:", total_qty)
+  )
+df_supermarket %>% 
+  group_by(branch, lat, lon) %>% 
+  summarise(total_income = sum(total),
+            total_qty = sum(quantity), .groups = "keep") %>% 
+  ungroup() %>% 
+  leaflet() %>% 
+  addTiles() %>% 
+  addCircleMarkers(
+    lng = ~lon, 
+    lat = ~lat,
+    radius = 4,
+    color = "#605ca8",
+    weight = 10,
+    fill = TRUE,
+    opacity = 5.0,
+    popup = ~paste("Branch:", branch, "<br>",
+                   "Total Income:", scales::dollar(total_income), "<br>",
+                   "Total Quantity:", total_qty)
+  )
 
 
