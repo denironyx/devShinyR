@@ -56,3 +56,57 @@ total_female_count <- df_supermarket %>%
 total_count = total_female_count + total_male_count
 
 total_female_count/total_count * 100
+
+library(plotly)
+
+
+
+
+
+
+# Get Manufacturer
+mtcars$manuf <- sapply(strsplit(rownames(mtcars), " "), "[[", 1)
+
+df <- mtcars
+df <- df %>% group_by(manuf)
+df <- df %>% summarize(count = n())
+fig <- df %>% plot_ly(labels = ~manuf, values = ~count)
+fig <- fig %>% add_pie(hole = 0.6)
+fig <- fig %>% layout(title = "Donut charts using Plotly",  showlegend = F,
+                      xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                      yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+
+fig
+
+
+
+
+
+
+df_supermarket %>% 
+  group_by(payment) %>% 
+  summarise(count_pay = n()) %>% 
+  plot_ly(labels = ~payment, values = ~count_pay) %>% 
+  add_pie(hole=0.6)
+
+
+fig <- fig %>% add_pie(hole = 0.6)
+%>% 
+  plot_ly(labels=~payment, value = ~count_pay) %>% 
+  add_pie(hole = 0.6)
+
+fig
+
+geom_
+
+
+
+
+
+
+
+
+
+
+
+

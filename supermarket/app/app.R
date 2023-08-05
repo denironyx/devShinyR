@@ -302,9 +302,14 @@ shinyApp(
     })
     
     
-    
-    
-    
+    output$payment_type <- renderPlotly({
+      filtered_data() %>% 
+        group_by(payment) %>% 
+        summarise(count_pay = n()) %>% 
+        plot_ly(labels = ~payment, values = ~count_pay) %>% 
+        add_pie(hole=0.6)
+    }
+    )
     
     
     output$user <- renderUser({

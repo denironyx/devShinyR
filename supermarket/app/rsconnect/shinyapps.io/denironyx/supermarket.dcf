@@ -1,0 +1,13 @@
+name: supermarket
+title: supermarket
+username:
+account: denironyx
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 9556414
+bundleId: 7532889
+url: https://denironyx.shinyapps.io/supermarket/
+when: 1691176823.42688
+lastSyncTime: 1691176823.42689
+asMultiple: FALSE
+asStatic: FALSE
