@@ -343,8 +343,7 @@ shinyApp(
         name = "Dennis Irorere",
         image = "dee.png",
         title = "Senior R developer", 
-        subtitle = "Author",
-        footer = p("The footer", class = "text-center")
+        subtitle = "Author"
       )
     })
   }
