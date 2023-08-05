@@ -1,6 +1,8 @@
 library(shinyWidgets)
+library(lubridate)
+library(tidyverse)
 
-source("scripts/data_wrangle.R")
+df_supermarket <- readRDS('data/df_supermarket.rds')
 
 # create an empty dataframe
 time_range_table <- data.frame()

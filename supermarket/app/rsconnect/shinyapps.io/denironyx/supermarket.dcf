@@ -5,9 +5,9 @@ account: denironyx
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 9556414
-bundleId: 7532889
+bundleId: 7534331
 url: https://denironyx.shinyapps.io/supermarket/
-when: 1691176823.42688
-lastSyncTime: 1691176823.42689
+when: 1691227542.00962
+lastSyncTime: 1691227542.00963
 asMultiple: FALSE
 asStatic: FALSE

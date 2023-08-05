@@ -8,7 +8,7 @@ library(plotly)
 library(DT)
 library(leaflet)
 
-source("scripts/data_wrangle.R")
+#source("scripts/data_wrangle.R")
 source("scripts/app_component.R")
 # Load up a font
 system('fc-cache -f ~/.fonts')
@@ -135,7 +135,7 @@ shinyApp(
           fluidRow(
             box(
               id = "map",
-              title = "Map of City vs Total Income",
+              title = "Map",
               width = 6,
               status = "purple",
               closable = FALSE,
@@ -145,7 +145,7 @@ shinyApp(
             ),
             box(
               id = "payment_chart",
-              title = "Pie Chart - Payment Type",
+              title = "Donut Chart - Payment Type",
               width = 6, 
               status = "purple",
               closable = FALSE,
@@ -222,7 +222,8 @@ shinyApp(
       filtered_data() %>% 
         summarise(total_income = sum(total)) %>% 
         pull() %>% 
-        round(digits = 0)
+        round(digits = 0) %>% 
+        scales::dollar()
     )
     
     output$total_quantity <- renderText(

@@ -11,7 +11,6 @@ df_supermarket %>%
   summarise(n=())
 
 
-
 df_supermarket %>% 
   #select(total) %>% 
   summarise(total_amount = sum(total))
