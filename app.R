@@ -269,23 +269,7 @@ shinyApp(
         theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
     )
     
-    # the supermarket table
-    # output$datatable <- DT::renderDataTable({
-    #   datatable(filtered_data() %>% 
-    #               transmute(
-    #                 `Invoice ID` = invoice_id,
-    #                 `Branch` = branch,
-    #                 `Customer Type` = customer_type,
-    #                 `Gender` = gender,
-    #                 `Product` = product_line,
-    #                 `Unit price` = unit_price,
-    #                 `Quantity` = quantity,
-    #                 `Total Price` = total,
-    #                 `Payment Type` = payment_type,
-    #                 `Gross Income` = gross_income
-    #               ),
-    #             rownames = FALSE)
-    # }, options = list(pageLength = 5))
+    ## Data table server side
     output$datatable <- DT::renderDataTable({
       datatable(filtered_data() %>% 
                   transmute(
@@ -304,7 +288,7 @@ shinyApp(
                 , options = list(pageLength = 20))
     })
     
-    
+    ## Donut chart - server side
     output$payment_type <- renderPlotly({
       filtered_data() %>% 
         group_by(payment) %>% 
@@ -314,6 +298,7 @@ shinyApp(
     }
     )
     
+    ## Map visualization using leaflet - server side
     output$map_viz <- renderLeaflet({
       filtered_data() %>% 
         group_by(branch, lat, lon) %>% 
@@ -337,7 +322,7 @@ shinyApp(
     })
    
      
-    
+    ## user dropdown section - server side
     output$user <- renderUser({
       dashboardUser(
         name = "Dennis Irorere",
