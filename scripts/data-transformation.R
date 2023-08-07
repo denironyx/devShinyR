@@ -6,10 +6,6 @@ df_supermarket <- readRDS('data/df_supermarket.rds')
 # Gross Income
 # Total product
 
-df_supermarket %>%
-  group_by(customer_type, product_line, branch) %>% 
-  summarise(n=())
-
 
 df_supermarket %>% 
   #select(total) %>% 

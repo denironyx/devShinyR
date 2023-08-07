@@ -233,6 +233,7 @@ shinyApp(
         round(digits = 0)
     )
     
+    # summary
     output$gross_income <- renderText(
       filtered_data() %>% 
         summarise(gross_income = sum(gross_income)) %>% 
