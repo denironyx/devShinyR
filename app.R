@@ -79,7 +79,9 @@ shinyApp(
           column(2, picker_branch),
           column(2, picker_customer_type),
           column(2, picker_product_line),
-          column(2, daterange)
+          column(2, start_daterange),
+          column(2, end_daterange)#,
+         # column(2, action_button)
         ),
         
         fluidRow(
@@ -188,10 +190,7 @@ shinyApp(
             )
           )
         )
-        
       )
-      
-      
       
     ),
     controlbar = bs4DashControlbar(),
@@ -208,12 +207,26 @@ shinyApp(
   
   server = function(input, output, session){
     
+    ## REACTIVE EVENTS
+    # filtered_data <- eventReactive(
+    #   eventExpr = req(input$apply),
+    #   
+    #   valueExpr = {
+    #     df_supermarket %>% 
+    #       filter(product_line %in% input$picker_product_line,
+    #              branch %in% input$picker_branch,
+    #              customer_type %in% input$picker_customer_type,
+    #              date >= input$start_daterange[1] & date <= input$end_daterange[1]) %>% 
+    #       as_tibble()
+    #   }
+    # )
+    
     filtered_data <- reactive({
-      df_supermarket %>% 
+      df_supermarket %>%
         filter(product_line %in% input$picker_product_line,
                branch %in% input$picker_branch,
                customer_type %in% input$picker_customer_type,
-               date >= input$daterange[1] & date <= input$daterange[2]) %>% 
+               date >= input$start_daterange[1] & date <= input$end_daterange[1]) %>%
         as_tibble()
     })
     
@@ -319,9 +332,7 @@ shinyApp(
                          "Total Income:", scales::dollar(total_income), "<br>",
                          "Total Quantity:", total_qty)
         )
-        
     })
-   
      
     ## user dropdown section - server side
     output$user <- renderUser({

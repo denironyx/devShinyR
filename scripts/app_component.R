@@ -80,20 +80,33 @@ picker_customer_type <- pickerInput(
 )
 
 
-# Picker date range
-daterange <- shinyWidgets::airDatepickerInput(
-  inputId = 'daterange',  
-  label = 'Date range:',
-  value = c(time_range$start_date, time_range$last_date),
+# Picker start date range
+start_daterange <- shinyWidgets::airDatepickerInput(
+  inputId = 'start_daterange',  
+  label = 'Start Date:',
+  value = time_range$start_date,
   minDate = time_range$first_date,
   maxDate = time_range$last_date,
-  multiple = TRUE, range = TRUE, todayButton = FALSE,
+  multiple = FALSE, range = FALSE, todayButton = FALSE,
   #clearButton = TRUE,
-  update_on = 'close', addon = 'none', width = "370px",
+  addon = 'none', width = "370px", update_on = "close",
   clearButton = TRUE
   # make_inline is a custom css that's found in the utils_BaseSettings.R script
 )
 
+# Picker end date range
+end_daterange <- shinyWidgets::airDatepickerInput(
+  inputId = 'end_daterange',  
+  label = 'End Date:',
+  value = time_range$last_date,
+  minDate = time_range$first_date,
+  maxDate = time_range$last_date,
+  multiple = FALSE, range = FALSE, todayButton = FALSE,
+  #clearButton = TRUE,
+  addon = 'none', width = "370px", update_on = "close",
+  clearButton = TRUE
+  # make_inline is a custom css that's found in the utils_BaseSettings.R script
+)
 
 
 # CSS
@@ -109,6 +122,12 @@ make_inline <- function(x) {
   }
   y
 }
+
+# Action Button
+action_button <- actionButton(inputId = "apply", 
+                              label   = "Apply", 
+                              icon    = icon("play"),
+                              width   = '100%')
 
 
 
