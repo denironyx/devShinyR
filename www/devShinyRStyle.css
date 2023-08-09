@@ -109,7 +109,7 @@ h3, .h3 {
   font-weight: 600;
 }
 
-.action-button, btn, btn-default, shiny-bound-input {  
+.btn-default {  
   background-color: white;  
   color: #605ca8;  
   font-size: 12px;  
