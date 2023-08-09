@@ -80,8 +80,8 @@ shinyApp(
           column(2, picker_customer_type),
           column(2, picker_product_line),
           column(2, start_daterange),
-          column(2, end_daterange)#,
-         # column(2, action_button)
+          column(2, end_daterange),
+          column(1, action_button)
         ),
         
         fluidRow(

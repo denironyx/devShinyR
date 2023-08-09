@@ -75,6 +75,9 @@ h6, .h6 {
 .fa-shop{
   color: #605ca8;
 }
+.fa-apply{
+  color: #605ca8;
+}
 
 h3, .h3 {
     margin-bottom: .5rem;
@@ -104,4 +107,13 @@ h3, .h3 {
 
 .form-group.inline-input label {
   font-weight: 600;
+}
+
+.action-button, btn, btn-default, shiny-bound-input {  
+  background-color: white;  
+  color: #605ca8;  
+  font-size: 12px;  
+  margin: 32px 10px 12px 10px; 
+  justify-content: center;  
+  align-items: center;  
 }

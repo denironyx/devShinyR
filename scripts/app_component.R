@@ -124,10 +124,12 @@ make_inline <- function(x) {
 }
 
 # Action Button
-action_button <- actionButton(inputId = "apply", 
-                              label   = "Apply", 
+action_button <- actionButton(inputId = "apply",
+                              label   = "Submit",
                               icon    = icon("play"),
-                              width   = '100%')
+                              width   = '60%')
+
+
 
 
 
