@@ -76,11 +76,11 @@ shinyApp(
       
       div(
         fluidRow(
-          column(2, picker_branch),
-          column(2, picker_customer_type),
-          column(2, picker_product_line),
-          column(2, start_daterange),
-          column(2, end_daterange),
+          column(2, h6(picker_branch)),
+          column(2, h6(picker_customer_type)),
+          column(2, h6(picker_product_line)),
+          column(2, h6(start_daterange)),
+          column(2, h6(end_daterange)),
           column(1, action_button)
         ),
         
@@ -207,28 +207,29 @@ shinyApp(
   
   server = function(input, output, session){
     
-    ## REACTIVE EVENTS
-    # filtered_data <- eventReactive(
-    #   eventExpr = req(input$apply),
-    #   
-    #   valueExpr = {
-    #     df_supermarket %>% 
-    #       filter(product_line %in% input$picker_product_line,
-    #              branch %in% input$picker_branch,
-    #              customer_type %in% input$picker_customer_type,
-    #              date >= input$start_daterange[1] & date <= input$end_daterange[1]) %>% 
-    #       as_tibble()
-    #   }
-    # )
-    
-    filtered_data <- reactive({
-      df_supermarket %>%
-        filter(product_line %in% input$picker_product_line,
-               branch %in% input$picker_branch,
-               customer_type %in% input$picker_customer_type,
-               date >= input$start_daterange[1] & date <= input$end_daterange[1]) %>%
-        as_tibble()
-    })
+    # REACTIVE EVENTS
+    filtered_data <- eventReactive(
+      eventExpr = req(input$apply),
+
+      valueExpr = {
+        df_supermarket %>%
+          filter(product_line %in% input$picker_product_line,
+                 branch %in% input$picker_branch,
+                 customer_type %in% input$picker_customer_type,
+                 date >= input$start_daterange[1] & date <= input$end_daterange[1]) %>%
+          as_tibble()
+      }
+    )
+
+    # 
+    # filtered_data <- reactive({
+    #   df_supermarket %>%
+    #     filter(product_line %in% input$picker_product_line,
+    #            branch %in% input$picker_branch,
+    #            customer_type %in% input$picker_customer_type,
+    #            date >= input$start_daterange[1] & date <= input$end_daterange[1]) %>%
+    #     as_tibble()
+    # })
     
     
     output$total_income <- renderText(
