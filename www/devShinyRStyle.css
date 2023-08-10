@@ -112,8 +112,8 @@ h3, .h3 {
 .btn-default {  
   background-color: white;  
   color: #605ca8;  
-  font-size: 12px;  
-  margin: 32px 10px 12px 10px; 
+  font-size: 10px;  
+  margin: 28px 10px 18px 10px; 
   justify-content: center;  
   align-items: center;  
 }
