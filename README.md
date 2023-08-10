@@ -1,6 +1,6 @@
 ## Supermarket Sales Data Dashboard
 
-![Dashboard](assets/img/shiny project.gif)
+![Dashboard](https://github.com/denironyx/devShinyR/blob/main/assets/img/shiny%20project.gif)
 
 # Shiny Dashboard
 
