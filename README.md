@@ -1,5 +1,7 @@
 ## Supermarket Sales Data Dashboard
 
+![Dashboard](assets/img/shiny project.gif)
+
 # Shiny Dashboard
 
 This is an attempt to develop enterprise dashboard for this supermarket to monitor the income performance.
