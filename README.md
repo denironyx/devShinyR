@@ -1,8 +1,8 @@
-## Supermarket Sales Data Dashboard
+# Supermarket Sales Data Dashboard
 
 ![Dashboard](https://github.com/denironyx/devShinyR/blob/main/assets/img/shiny%20project.gif)
 
-# Shiny Dashboard
+## Shiny Dashboard
 
 This is an attempt to develop enterprise dashboard for this supermarket to monitor the income performance.
 
