@@ -64,3 +64,7 @@ The options used in this command are explained as follows:
 The Shiny app will be accessible in your web browser at <http://localhost:3838>.
 
 Remember to replace shinyapp:v01 with the appropriate image name and tag if you used a different name or tag during the build step.
+
+----------------------
+
+Thanks to the work done by [bs4Dash](https://github.com/RinteRface/bs4Dash/)
