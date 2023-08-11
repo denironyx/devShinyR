@@ -87,9 +87,14 @@ start_daterange <- shinyWidgets::airDatepickerInput(
   value = time_range$start_date,
   minDate = time_range$first_date,
   maxDate = time_range$last_date,
-  multiple = FALSE, range = FALSE, todayButton = FALSE,
+  multiple = FALSE, 
+  range = FALSE, 
+  todayButton = FALSE,
   #clearButton = TRUE,
-  addon = 'none', width = "370px", update_on = "close",
+  addon = 'none', 
+  width = "370px", 
+  update_on = "close", 
+  autoClose = TRUE,
   clearButton = TRUE
   # make_inline is a custom css that's found in the utils_BaseSettings.R script
 )
@@ -101,9 +106,14 @@ end_daterange <- shinyWidgets::airDatepickerInput(
   value = time_range$last_date,
   minDate = time_range$first_date,
   maxDate = time_range$last_date,
-  multiple = FALSE, range = FALSE, todayButton = FALSE,
+  multiple = FALSE, 
+  range = FALSE, 
+  todayButton = FALSE,
   #clearButton = TRUE,
-  addon = 'none', width = "370px", update_on = "close",
+  addon = 'none', 
+  width = "370px", 
+  update_on = "close",
+  autoClose = TRUE,
   clearButton = TRUE
   # make_inline is a custom css that's found in the utils_BaseSettings.R script
 )
